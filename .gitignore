@@ -1,0 +1,28 @@
+# PyCharm project files
+.idea/
+*.iml
+
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+
+# Python package files
+*.egg-info/
+dist/
+build/
+
+# Virtual environment files
+env/
+venv/
+*.env
+
+# OS-specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Miscellaneous
+*.log
+*.tmp
+*.bak
