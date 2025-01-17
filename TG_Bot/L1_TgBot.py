@@ -1,7 +1,7 @@
 import telebot
 
 # Замените 'YOUR_API_KEY' на ваш фактический API-ключ Telegram-бота
-API_KEY = '7947397986:AAESE_zpOAB8-cnj1l0jlefHgksNd81urys'
+API_KEY = ''
 bot = telebot.TeleBot(API_KEY)
 
 
