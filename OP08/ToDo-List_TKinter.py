@@ -87,7 +87,7 @@ def on_select(event):
 
 root = tk.Tk()
 root.title("Трекер задач")
-root.geometry("600x400")
+root.geometry("700x400")
 root.configure(bg='#f0f0f5')
 
 
