@@ -19,8 +19,8 @@ def delete_task():
     task = task_entry.get()
     if task:
         task_entry.delete(0, tk.END)
-    else:
-        messagebox.showwarning("Удалить", "Пожалуйста, введите задачу.")
+    # else:
+    #     messagebox.showwarning("Удалить", "Пожалуйста, введите задачу.")
     deleted = False
     for listbox in [new_tasks_listbox, in_progress_listbox, closed_tasks_listbox]:
         for i in range(listbox.size()):
@@ -39,26 +39,38 @@ def close_task():
     if task:
         closed_tasks_listbox.insert(tk.END, task)
         task_entry.delete(0, tk.END)
-    else:
-        messagebox.showwarning("Закрыть", "Пожалуйста, введите задачу.")
+    closed = False
     for listbox in [new_tasks_listbox, in_progress_listbox, closed_tasks_listbox]:
         for i in range(listbox.size()):
             if listbox.itemcget(i, "bg") == "lightblue":
                 closed_tasks_listbox.insert(tk.END, listbox.get(i))
                 listbox.delete(i)
-
+                closed = True
+    if closed:
+        messagebox.showinfo("Закрыть", "Выбранные задачи были закрыты.")
+    elif not new_tasks_listbox.size() and not in_progress_listbox.size() and not closed_tasks_listbox.size():
+        messagebox.showwarning("Закрыть", "Нет задач для закрытия.")
+    else:
+        messagebox.showwarning("Закрыть", "Нет выбранных задач для закрытия.")
 
 def move_to_work():
     task = task_entry.get()
     if task:
         in_progress_listbox.insert(tk.END, task)
         task_entry.delete(0, tk.END)
+    inWork=False
     for listbox in [new_tasks_listbox, in_progress_listbox, closed_tasks_listbox]:
         for i in range(listbox.size()):
             if listbox.itemcget(i, "bg") == "lightblue":
                 in_progress_listbox.insert(tk.END, listbox.get(i))
                 listbox.delete(i)
-
+                inWork=True
+    if inWork:
+        messagebox.showinfo("В работу", "Выбранные задачи были перемещены в работу.")
+    elif not new_tasks_listbox.size() and not in_progress_listbox.size() and not closed_tasks_listbox.size():
+        messagebox.showwarning("В работу", "Нет задач для перемещения в работу.")
+    else:
+        messagebox.showwarning("В работу", "Нет выбранных задач для перемещения в работу.")
 
 def mark_task():
     for listbox in [new_tasks_listbox, in_progress_listbox, closed_tasks_listbox]:
@@ -115,7 +127,7 @@ add_button.grid(row=0, column=0, padx=5)
 delete_button = tk.Button(buttons_frame, text="Удалить Задачу", bg=button_color, fg=task_color, command=delete_task)
 delete_button.grid(row=0, column=1, padx=5)
 
-mark_button = tk.Button(buttons_frame, text="Пометить задачу", bg=button_color, fg=task_color, command=mark_task)
+mark_button = tk.Button(buttons_frame, text="Выбрать задачу", bg=button_color, fg=task_color, command=mark_task)
 mark_button.grid(row=0, column=2, padx=5)
 
 work_button = tk.Button(buttons_frame, text="Перевести в работу", bg=button_color, fg=task_color, command=move_to_work)
