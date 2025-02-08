@@ -2,7 +2,12 @@ import tkinter as tk
 from tkinter import messagebox
 
 
-
+def todo_list():
+    root = tk.Tk()
+    root.title("Трекер задач")
+    root.geometry("700x400")
+    root.configure(bg='#f0f0f5')
+    return root
 def add_to_new():
     task = task_entry.get()
     if task:
@@ -172,3 +177,4 @@ tasks_frame.columnconfigure(1, weight=1)
 tasks_frame.columnconfigure(2, weight=1)
 
 root.mainloop()
+
