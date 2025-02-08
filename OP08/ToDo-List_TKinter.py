@@ -2,6 +2,18 @@ import tkinter as tk
 from tkinter import messagebox
 
 
+"""
+Трекер задач
+Простое приложение для управления задачами, построенное на Tkinter.
+Позволяет пользователям добавлять, удалять, отмечать и перемещать задачи между тремя колонками: Новые задачи, В работе и Закрытые задачи.
+Пользователи также могут выбирать несколько задач с помощью Ctrl+Click и перемещать их между колонками.
+
+Task Tracker
+A simple task management application built with Tkinter.
+Allows users to add, delete, mark, and move tasks between three columns: New Tasks, In Progress, and Closed Tasks.
+Users can also select multiple tasks using Ctrl+Click and move them between columns.
+"""
+
 def todo_list():
     root = tk.Tk()
     root.title("Трекер задач")

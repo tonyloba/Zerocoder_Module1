@@ -15,6 +15,13 @@ def start_bot():
     запрашивает информацию о предпочтениях в диете и затем
     отправляет соответствующие предложения питания в указанные временные интервалы в чат
     и полное меню на указанную почту.
+
+    La Diet Bot
+    A Telegram bot that helps users plan their meals based on their dietary preferences.
+    Users can choose from a variety of diets, including vegetarian, Mediterranean, keto, paleo, and more.
+    The bot will then provide users with a daily meal plan, including breakfast, lunch, snack, and dinner options.
+    Users can also receive their meal plan via email.
+    This bot is designed to make healthy eating easy and convenient.
     """
 
     load_dotenv()
