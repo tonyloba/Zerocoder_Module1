@@ -6,6 +6,8 @@ class Store():
     def add_item(self, name, price):
         self.items[name] = price
     def remove_item(self, name):
+        if name not in self.items:
+            return
         del self.items[name]
     def get_items(self):
         return f'{self.items}'
