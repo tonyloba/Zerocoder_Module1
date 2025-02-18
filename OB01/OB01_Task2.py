@@ -1,5 +1,5 @@
 class Store():
-    def __init__(self, name, address, items):
+    def __init__(self, name, address):
         self.name = name
         self.address = address
         self.items = {}
@@ -20,16 +20,16 @@ class Store():
 
 if __name__ == "__main__":
 
-    store1 = Store("My Store1", "123 Main St", {})
+    store1 = Store("My Store1", "123 Main St")
     store1.add_item("Shoes", 10)
     store1.add_item("T-Shirt", 20)
 
-    store2 = Store("My Store2", "3 New St", {})
+    store2 = Store("My Store2", "3 New St")
     store2.add_item("Shoes", 1)
     store2.add_item("T-Shirt", 2)
     store2.add_item("Jeans", 5)
 
-    store3 = Store("My Store3", "45 baker street", {})
+    store3 = Store("My Store3", "45 baker street")
     store3.add_item("Shoes", 1000)
     store3.add_item("T-Shirt", 2000)
     store3.add_item("Jeans", 5000)
