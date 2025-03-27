@@ -63,16 +63,22 @@ class TicTacToe:
                 self.show_end_game_menu()
             else:
                 self.game_window.after(1000, self.reset_board)
+                self.switch_player()
 
         elif self.check_draw():
             messagebox.showinfo("Игра окончена", "Ничья!")
             self.history_text.insert(tk.END, f"Ничья!\n")
             self.highlight_draw()
             self.game_window.after(1000, self.reset_board)
+            self.switch_player()
 
         else:
-            self.current_player = "O" if self.current_player == "X" else "X"
-            self.turn_label['text'] = f"Ходит: {self.current_player}"
+            self.switch_player()
+
+    def switch_player(self):
+        """Меняет текущего игрока и обновляет надпись"""
+        self.current_player = "O" if self.current_player == "X" else "X"
+        self.turn_label['text'] = f"Ходит: {self.current_player}"
 
     def check_winner(self):
         for i in range(3):
