@@ -2,6 +2,14 @@ import scrapy
 
 
 class DivannewparsSpider(scrapy.Spider):
+    """
+    scrapy startproject divanpars
+    cd [путь] scrapy genspider divannewpars divan.ru
+    pip install ipython
+    scrapy shell
+    fetch(’ссылка’) — используется, чтобы загрузить веб-страницу. После использования покажется статус-код;
+    cd [путь] scrapy crawl divannewpars
+    """
     name = "divannewpars"
     allowed_domains = ["divan.ru"]
     start_urls = ["https://www.divan.ru/category/svet"]
