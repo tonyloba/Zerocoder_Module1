@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BLOG PAGE (VD04_Task2)</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/">Main</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="/blog/">Blog</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/contacts/">Contacts</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled">Extra</a>
+    </li>
+</ul>
+
+<div class="container" style="margin-top: 0px">
+    <h1>Блог</h1>
+</div>
+
+
+    <h1>Мой Рейтинг Блюд</h1>
+    <table>
+        <tr>
+            <th>Название блюда</th>
+            <th>Оценка</th>
+            <th>Ссылка на рецепт</th>
+            <th>Фото блюда</th>
+        </tr>
+        <tr>
+            <td>Пицца</td>
+            <td>9</td>
+            <td><a href="https://povar.ru/recipes/picca-59176.html" target="_blank">Рецепт</a></td>
+            <td><img src="/static/image/pizza.jpg" alt="Пицца" width="100"></td>
+        </tr>
+        <tr>
+            <td>Суши</td>
+            <td>8</td>
+            <td><a href="https://povar.ru/recipes/sushi_s_semgoi_i_ogurcom-30791.html" target="_blank">Рецепт</a></td>
+            <td><img src="/static/image/sushi.jpg" alt="Суши" width="100"></td>
+        </tr>
+        <tr>
+            <td>Борщ</td>
+            <td>10</td>
+            <td><a href="https://povar.ru/recipes/borsh_klassicheskii_domashnii-50825.html" target="_blank">Рецепт</a></td>
+            <td><img src="/static/image/borsch.jpg" alt="Борщ" width="100"></td>
+        </tr>
+        <tr>
+            <td>Паста</td>
+            <td>7</td>
+            <td><a href="https://povar.ru/recipes/pasta_prostoi_recept-61415.html" target="_blank">Рецепт</a></td>
+            <td><img src="/static/image/pasta.jpg" alt="Паста" width="100"></td>
+        </tr>
+        <tr>
+            <td>Салат Цезарь</td>
+            <td>6</td>
+            <td><a href="https://povar.ru/recipes/klassicheskii_cezar-54576.html" target="_blank">Рецепт</a></td>
+            <td><img src="/static/image/caesar.jpg" alt="Салат Цезарь" width="100"></td>
+        </tr>
+    </table>
+
+</body>
+</html>
