@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}О проекте{% endblock %}
+
+{% block content %}
+    <h1>О нашем проекте</h1>
+    <p>Информация о реализованных и планируемых проектах:</p>
+    <table>
+        {% for row in info %}
+            <tr>
+                {% for col in row %}
+                    {% if loop.index0 == 0 %}
+                        <th>{{ col }}</th>
+                    {% else %}
+                        <td>{{ col }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin:0; padding:0;}
+        nav { background: #007bff; padding: 10px;}
+        nav a { color: #fff; margin: 0 15px; text-decoration: none;}
+        footer { background: #222; color: #eee; text-align: center; padding: 15px 0; position:fixed; width:100%; bottom:0;}
+        .container { padding: 30px; min-height: 80vh;}
+        table { border-collapse: collapse; width: 100%; margin: 20px 0;}
+        th, td { border: 1px solid #ccc; padding: 8px 12px;}
+        th { background: #f0f0f0;}
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/about">О проекте</a>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        &copy; 2024 Мое Flask-приложение
+    </footer>
+</body>
+</html>

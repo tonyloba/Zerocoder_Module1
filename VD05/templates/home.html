@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+    <h1>Добро пожаловать!</h1>
+    <p>Ниже приведена таблица сотрудников:</p>
+    <table>
+        {% for row in table %}
+            <tr>
+                {% for col in row %}
+                    {% if loop.index0 == 0 %}
+                        <th>{{ col }}</th>
+                    {% else %}
+                        <td>{{ col }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
