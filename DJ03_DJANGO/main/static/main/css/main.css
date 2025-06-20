@@ -1,0 +1,98 @@
+        body {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            font-family: 'Nanum Gothic', sans-serif;
+            color: #333;
+            padding-bottom: 60px;
+        }
+        aside {
+            min-width: 220px;
+            background: #343a40;
+            color: #fff;
+            min-height: 100vh;
+            padding: 30px 15px;
+        }
+        aside img {
+            display: block;
+            margin: 0 auto 10px auto;
+            border-radius: 50%;
+            background: #fff;
+            padding: 5px;
+        }
+        aside span {
+            display: block;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        aside ul {
+            list-style: none;
+            padding: 0;
+        }
+        aside ul li {
+            margin: 15px 0;
+        }
+        aside ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+        aside ul li a:hover {
+            color: #ffc107;
+            text-decoration: underline;
+        }
+        main {
+            padding: 40px 40px;
+            background: #fff;
+            min-height: 100vh;
+        }
+        @media (max-width: 768px) {
+            aside {
+                min-width: 100%;
+                min-height: auto;
+                padding: 10px;
+            }
+            main {
+                padding: 20px 10px;
+            }
+        }
+        .wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+         .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 1030;
+            background: #343a40;     /* тёмный фон, как у aside */
+            color: #fff;             /* белый текст */
+            border-top: none;        /* убираем границу сверху */
+            font-size: 0.95rem;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: #ffc107;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                font-size: 0.85rem;
+                padding: 10px 0;
+            }
+        }
