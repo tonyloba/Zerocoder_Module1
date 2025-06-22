@@ -1,0 +1,307 @@
+нужно создать новое приложение. Мы можем продолжить работу внутри уже существующих страниц, но для правильной структуры нужно создать отдельное приложение.
+
+Заходим в терминал и прописываем команду.
+
+python manage.py startapp news
+Нажимаем на клавишу Enter.
+
+Закрываем терминал.
+
+Переходим в файл settings.py. Добавляем созданное приложение в словарь INSTALLED_APPS
+
+'news',
+Открываем файл zerocoder/urls.py. В словаре urlpatterns прописываем ещё один адрес.
+
+path('news/', include('news.urls'))
+Внутри приложения news создаём новый файл urls.py (Правой кнопкой мыши — New — Python File).
+
+Копируем и вставляем код из main/urls.py.
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+	path('', views.index, name='home'),
+	path('newnewnew', views.new, name='page2')
+]
+Редактируем код:
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+	path('', views.home, name='news_home'),
+]
+Создаём метод, который будет запускаться при переходе на страницу news. Для этого переходим в файл views.py. Мы обратимся к папке templates из приложения main, потому что все папки templates как бы объединяются в одну.
+
+from django.shortcuts import render
+
+def home(request):
+	return render(request, 'main/new.html')
+Запускаем сервер через терминал:
+
+python manage.py runserver
+Проверяем работу страниц.
+
+
+Чтобы всё выключить, нажимаем в терминале ctrl+c.
+
+Создаём папку templates, в ней папку news, внутри — html-файлы: news.html.
+
+В файле news/views.py меняем путь:
+
+from django.shortcuts import render
+
+def home(request):
+	return render(request, 'news/news.html')
+Для проверки прописываем в файле news.html:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Это файлик news.html</h1>
+</body>
+</html>
+Запускаем сервер и проверяем работу страниц. После проверки нажимаем ctrl+c, чтобы выключить терминал.
+
+Придаём странице news такую же структуру, так у main. Копируем весь код из index.html и вставляем в news.html. Удаляем лишние строчки.
+
+{% extends 'main/layoute.html' %}
+
+{% block title %}
+	<title>Новостная страница</title>
+{% endblock %}
+
+{% block content %}
+<h1>Новостная страница</h1>
+{% endblock %}
+Наследовать от шаблона layoute.html из приложения main — можно.
+
+Переходим в файл layoute.html. Сейчас у нас три страницы, а в меню только две ссылки. Добавляем третью.
+
+<a class="nav-link" href="{% url 'home' %}">Главная</a>
+<a class="nav-link" href="{% url 'page2' %}">Второстепенная</a>
+<a class="nav-link" href="{% url 'news_home' %}">Новостная страница</a>
+Запускаем сервер и проверяем работу меню.
+
+Создаём базу данных.
+
+Для этого мы будем работать с models.py, который находится в приложении news.
+
+Здесь сразу же импортирован модуль для работы с моделями.
+
+from django.db import models
+Создаём класс. В круглых скобках прописываем возможность создавать внутри класса поля для таблицы.
+
+from django.db import models
+
+class News_post(models.Model):
+	title = models.CharField('Название новости', max_length=50)
+	short_description = models.CharField('Краткое описание новости', max_length=200)
+	text = models.TextField('Новость')
+	pub_date = models.DateTimeField('Дата публикации')
+
+
+Мы прописали структуру базы данных, то есть что в ней будет. В проекте описанная таблица пока не существует. Чтобы она начала существовать, нам нужны миграции. Миграции создают связь между базой данных и между приложением, соединяет их.
+
+В пакете migrations через терминал создаём файл:
+
+python manage.py makemigrations
+В пакете создастся файл 0001_initial.py. В нём более подробно описаны поля таблицы, а также создано ключевое поле ‘id’. Такое поле должно быть в каждой таблице.
+
+Запускаем миграции через терминал.
+
+python manage.py migrate
+Панель администратора открывается по пути, прописанному в urls.py. Если мы допишем к основному адресу сайта “admin/”, то откроется панель администратора.
+
+Запускаем сервер, переходим по ссылке и дописываем admin/ к адресу сайта.
+
+Панель вся на английском. Чтобы перевести её на русский язык, переходим в файл settings py и в самом конце находим запись:
+
+LANGUAGE_CODE = 'en-us'
+Редактируем строку:
+
+LANGUAGE_CODE = 'ru'
+Останавливаем сервер — нажимаем ctrl+c.
+
+Нам нужно войти в систему, но мы не зарегистрированы. Создадим себе аккаунт:
+
+В терминале прописываем команду и нажимаем на клавишу Enter.
+
+python manage.py createsuperuser
+В терминале вводим имя пользователя. Терминал уже предлагает имя — если оно нас устраивает, нажимаем на клавишу Enter. Если не устраивает, то вводим новое и нажимаем на клавишу Enter.
+
+По желанию вводим адрес электронной почты. Если не хотим вводить, просто нажимаем на клавишу Enter.
+
+Вводим пароль. При введении его не будет видно.
+
+Повторяем пароль.
+
+Запускаем сервер и входим в панель администратора.
+
+В панели администратора автоматически созданы две таблицы:
+
+Группы;
+Пользователи содержит всех пользователей, зарегистрированных на сайте. Сейчас здесь находимся только мы.
+Таблицы, которую мы создали, нет, потому что мы не зарегистрировали её в панели администратора. Абстрактно она существует, но к админ-панели она не подключена.
+
+Подключаем таблицу к админ-панели:
+
+Чтобы остановить сервер, нажимаем на ctrl+c.
+
+Открываем файл admin.py. В нём прописан импорт модуля.
+
+from django.contrib import admin
+Прописываем импорт класса.
+
+from .models import News_post
+Прописываем команду регистрации новой таблицы внутри проекта.
+
+admin.site.register(News_post)
+Запускаем сервер, входим в админ-панель.
+
+Переходим в файл models.py и создаём вложенный класс:
+
+from django.db import models
+
+class News_post(models.Model):
+	title = models.CharField('Название новости', max_length=50)
+	short_description = models.CharField('Краткое описание новости', max_length=200)
+	text = models.TextField('Новость')
+	pub_date = models.DateTimeField('Дата публикации')
+
+	class Meta:
+		verbose_name = 'Новость'
+		verbose_name_plural = 'Новости'
+Заходим в панель администратора. Открываем таблицу Новости.
+
+В правом верхнем углу нажимаем на кнопку Добавить новость.
+
+Заполняем форму. Дату и время либо прописываем вручную, либо ставим текущие, нажав на Сегодня.
+
+Нажимаем на любую из трёх кнопок внизу.
+
+
+Чтобы вывести новости на страницу:
+
+Открываем файл views.py, импортируем класс.
+
+from django.shortcuts import render
+from .models import News_post
+
+def home(request):
+	return render(request, 'news/news.html')
+Создаём переменную для получения всех записей.
+
+from django.shortcuts import render
+
+def home(request):
+	news = News_post.objects.all()
+	return render(request, 'news/news.html')
+Прописываем словарь для передачи информации в html-шаблон.
+
+from django.shortcuts import render
+
+def home(request):
+	news = News_post.objects.all()
+	return render(request, 'news/news.html', {'news': news})
+Открываем news.html и указываем передачу.
+
+{% extends 'main/layoute.html' %}
+
+{% block title %}
+	<title>Новостная страница</title>
+{% endblock %}
+
+{% block content %}
+<h1>Новостная страница</h1>
+{{news}}
+{% endblock %}
+Запускаем сервер, заходим на новостную страницу. Информацию нужно распределять, но она уже есть.
+
+Внутри models.py прописываем специальный метод внутри класса, чтобы на сайте отображалось название новости.
+
+from django.db import models
+
+class News_post(models.Model):
+	title = models.CharField('Название новости', max_length=50)
+	short_description = models.CharField('Краткое описание новости', max_length=200)
+	text = models.TextField('Новость')
+	pub_date = models.DateTimeField('Дата публикации')
+
+	def __str__(self):
+		return self.title
+
+	class Meta:
+		verbose_name = 'Новость'
+		verbose_name_plural = 'Новости'
+Запускаем сервер. В панели администратора создаём ещё одну новость.
+
+Открываем news.html и настраиваем выведение всех новостей.
+
+{% extends 'main/layoute.html' %}
+
+{% block title %}
+	<title>Новостная страница</title>
+{% endblock %}
+
+{% block content %}
+<h1>Новостная страница</h1>
+
+{% for new in news %}
+	<div>
+		<h3> {{ new.title }} </h3>
+		<p> {{ new.short_description }} </p>
+	</div>
+{% endfor %}
+
+{% endblock %}
+Запускаем сервер. Новости должны выводиться более корректно.
+
+
+
+РАБОТА С МИГРАЦИЯМИ
+
+Ваша модель `NewsPosts` (или подобная) была изменена (например, вы добавили поле `author = models.ForeignKey(User, ...)`), но **миграции** не были применены, или база данных не была корректно обновлена.
+
+### Решение — пошагово
+
+1. **Проверьте миграции:**
+    - Убедитесь, что в `news/migrations/` есть миграция, где добавляется поле `author`.
+
+2. **Сделайте новые миграции:**
+    ```bash
+    python manage.py makemigrations
+    ```
+
+3. **Примените миграции:**
+    ```bash
+    python manage.py migrate
+    ```
+
+4. **Если не помогает:**
+    - Иногда миграции "ломаются" если вы меняли модель много раз вручную.
+    - В SQLite можно "сломать" миграции и база данных будет не в том состоянии.
+
+5. **Проверьте структуру таблицы:**
+    - Откройте SQLite DB Browser или воспользуйтесь командой:
+      ```bash
+      python manage.py dbshell
+      ```
+      и выполните
+      ```sql
+      PRAGMA table_info(news_news_posts);
+      ```
+      Проверьте, есть ли поле `author_id`.
+
+6. **Если поле отсутствует:**
+    - Попробуйте удалить последнюю миграцию (или несколько) и создать заново:
+      ```bash
+      rm news/migrations/00XX_some_migration.py
+      python manage.py makemigrations
+      python manage.py migrate
+      ```

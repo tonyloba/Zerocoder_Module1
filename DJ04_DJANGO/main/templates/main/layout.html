@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel = "stylesheet" href = "{% static 'main/css/main.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    {% block title %}
+
+    {% endblock %}
+
+</head>
+<body>
+<!--   {% include 'main/nav.html' %}-->
+
+<div class="wrapper d-flex flex-column min-vh-100">
+
+    <div class="container-fluid flex-grow-1">
+        <div class="row flex-nowrap">
+            <div class="col-auto p-0">
+                <aside>
+                    <img src="{% static 'main/img/bird_logo.jpg' %}" alt="bird logo" width="60">
+                    <span>BirdyDjango</span>
+                    <ul>
+                        <li><a href="{% url 'main:index' %}">Main</a></li>
+                        <li><a href="{% url 'main:new' %}">New</a></li>
+                        <li><a href="{% url 'main:test' %}">Test</a></li>
+                        <li><a href="{% url 'main:contact' %}">Contact</a></li>
+                        <li><a href="{% url 'news:news_home' %}">NEWS</a></li>
+                        <li><a href="{% url 'news:add_news_link' %}">Add News</a></li>
+                    </ul>
+                </aside>
+            </div>
+            <div class="col py-3">
+                <main>
+                    {% block content %}
+                    {% endblock %}
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer py-3">
+      <div class="container text-center">
+        <span>© 2024 BirdyDjango. Все права защищены.</span>
+      </div>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    <title>CREATE NEWS PAGE</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1>Welcome to the CREATE NEWS PAGE</h1>
+    <div>
+        <p></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <form method="POST">
+                {% csrf_token %}
+                <h2>CREATE YOUR NEWS</h2>
+                <div class="form-group">
+                    <label>Title</label>
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    <label>Short Info</label>
+                    {{ form.short_info }}
+                </div>
+                <div class="form-group">
+                    <label>Text</label>
+                    {{ form.text }}
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    {{ form.publish_date }}
+                </div>
+                <div class="form-group">
+                    <label>Author</label>
+                    {{ form.author }}
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+            <p>{{ form.errors }}</p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

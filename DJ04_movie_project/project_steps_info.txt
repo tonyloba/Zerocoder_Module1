@@ -1,0 +1,220 @@
+## 1. Создание проекта и приложения
+
+Выполните в терминале:
+
+```bash
+django-admin startproject movie_project
+cd movie_project
+python manage.py startapp films
+```
+
+---
+
+## 2. Регистрация приложения
+
+В `movie_project/settings.py` добавьте `'films',` в `INSTALLED_APPS`.
+
+```python
+INSTALLED_APPS = [
+    ...
+    'films',
+]
+```
+
+---
+
+## 3. Модель
+
+В `films/models.py`:
+
+```python
+from django.db import models
+
+class Movie(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    review = models.TextField()
+
+    def __str__(self):
+        return self.title
+```
+
+---
+
+## 4. Миграции
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+---
+
+## 5. Формы
+
+В `films/forms.py`:
+
+```python
+from django import forms
+from .models import Movie
+
+class MovieForm(forms.ModelForm):
+    class Meta:
+        model = Movie
+        fields = ['title', 'description', 'review']
+```
+
+---
+
+## 6. Вьюхи
+
+В `films/views.py`:
+
+```python
+from django.shortcuts import render, redirect
+from .forms import MovieForm
+from .models import Movie
+
+def add_movie(request):
+    if request.method == 'POST':
+        form = MovieForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('movie_list')
+    else:
+        form = MovieForm()
+    return render(request, 'films/add_movie.html', {'form': form})
+
+def movie_list(request):
+    movies = Movie.objects.all()
+    return render(request, 'films/movie_list.html', {'movies': movies})
+```
+
+---
+
+## 7. URLs
+
+Создайте файл `films/urls.py`:
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('add/', views.add_movie, name='add_movie'),
+    path('', views.movie_list, name='movie_list'),
+]
+```
+
+И добавьте в `movie_project/urls.py`:
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('films.urls')),
+]
+```
+
+---
+
+## 8. Шаблоны
+
+Создайте папку `films/templates/films/`.
+
+### `add_movie.html`:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить фильм</title>
+</head>
+<body>
+    <h1>Добавить фильм</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+    <a href="{% url 'movie_list' %}">Посмотреть все фильмы</a>
+</body>
+</html>
+```
+
+### `movie_list.html`:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список фильмов</title>
+</head>
+<body>
+    <h1>Список фильмов</h1>
+    <a href="{% url 'add_movie' %}">Добавить новый фильм</a>
+    <ul>
+        {% for movie in movies %}
+        <li>
+                <strong>{{ movie.title }}</strong><br>
+                {{ movie.description }}<br>
+                <em>Отзыв: {{ movie.review }}</em>
+            </li>
+        {% empty %}
+            <li>Нет фильмов.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+```
+
+---
+
+## 9. Итоговая структура файлов
+
+```
+movie_project/
+├── manage.py
+├── movie_project/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── films/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── migrations/
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   ├── views.py
+│   └── templates/
+│       └── films/
+│           ├── add_movie.html
+│           └── movie_list.html
+```
+
+---
+
+Теперь можно запускать сервер:
+
+```bash
+python manage.py runserver
+```
+
+Зайти на [http://127.0.0.1:8000/add/](http://127.0.0.1:8000/add/) чтобы добавить фильм, и на [http://127.0.0.1:8000/](http://127.0.0.1:8000/) для просмотра списка.
+
+**4. (Необязательно) Можно добавить свой CSS**
+
+Если хочешь добавить немного своего стиля, создай файл `static/styles.css` и подключи его в `<head>`, после Bootstrap:
+
+```html
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+```
+
+Не забудь добавить `'django.contrib.staticfiles'` в `INSTALLED_APPS` и прописать `{% load static %}` в начале шаблона.
