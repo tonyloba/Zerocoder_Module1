@@ -15,6 +15,8 @@ build/
 # Virtual environment files
 env/
 venv/
+.venv/
+.env/
 *.env
 
 # OS-specific files
@@ -26,3 +28,14 @@ Desktop.ini
 *.log
 *.tmp
 *.bak
+
+# Pycache
+.pyc
+__pycache__
+
+#Django
+*/migrations
+
+# IDE
+.idea
+.vscode/
