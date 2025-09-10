@@ -50,29 +50,6 @@ async def photo_random(message: Message):
     rand_photo = random.choice(list)
     await message.answer_photo(photo= rand_photo, caption='Random photo')
 
-# @dp.message(Command('weather'))
-# async def weather(message: Message):
-#     # Разбираем аргументы после команды
-#     args = message.text.split(maxsplit=1)
-#
-#     if len(args) > 1:
-#         city = args[1]
-#     else:
-#         city = "Moscow"  # город по умолчанию
-#
-#     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metric&lang=ru"
-#
-#     async with aiohttp.ClientSession() as session:
-#         async with session.get(url) as resp:
-#             if resp.status == 200:
-#                 data = await resp.json()
-#                 temp = data["main"]["temp"]
-#                 description = data["weather"][0]["description"]
-#                 await message.answer(
-#                     f"Погода в {city}:\n🌡 Температура: {temp}°C\n☁ {description.capitalize()}"
-#                 )
-#             else:
-#                 await message.answer(f"Не удалось найти погоду для города '{city}' 😢")
 @dp.message(Command('weather'))
 async def weather(message: Message):
     args = message.text.split(maxsplit=1)
