@@ -8,6 +8,8 @@ from deep_translator import GoogleTranslator
 from gtts import gTTS
 import os
 import random
+import keyboard as kb
+
 
 from config import TOKEN, WEATHER_API_KEY
 bot = Bot(token=TOKEN)
@@ -21,7 +23,11 @@ URL = f"http://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={WEATHER_A
 
 @dp.message(CommandStart())
 async def start(message: Message):
-    await message.answer(f'Hi {message.from_user.first_name}! I am a bot!')
+    await message.answer(f'Hi {message.from_user.first_name}! I am a bot!',reply_markup=kb.main_keyboard)
+    # Inline Buttons :
+    # await message.answer(f'Hi {message.from_user.first_name}! I am a bot!',reply_markup=kb.inline_keyboard)
+    # Keyboard Builder
+    # await message.answer(f'Hi {message.from_user.first_name}! I am a bot!',reply_markup=kb.test_keyboard())
 
 @dp.message(Command('help'))
 async def help(message: Message):
